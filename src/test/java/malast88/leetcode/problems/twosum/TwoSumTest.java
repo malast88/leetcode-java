@@ -22,7 +22,8 @@ public class TwoSumTest {
     private static Stream<Arguments> getTwoSumArgs() {
         return Stream.of(
                 Arguments.of(new int[]{2, 7, 11, 15}, 9, new int[]{0, 1}),
-                Arguments.of(new int[]{3, 3}, 6, new int[]{0, 1})
+                Arguments.of(new int[]{3, 3}, 6, new int[]{0, 1}),
+                Arguments.of(new int[]{}, 0, null)
         );
     }
 
@@ -36,13 +37,5 @@ public class TwoSumTest {
 
         // verify
         assertArrayEquals(expectedResult, result);
-    }
-
-    @Test
-    public void itShouldThrowIllegalArgumentExceptionWhenWrongInputProvided() {
-        // init
-
-        // test & verify
-        assertThrows(IllegalArgumentException.class, () -> sut.twoSum(new int[]{}, 0));
     }
 }

@@ -17,7 +17,7 @@ public class RomanToIntegerTest {
     @InjectMocks
     private RomanToInteger sut;
 
-    private static Stream<Arguments> getReverseIntegerArgs() {
+    private static Stream<Arguments> getRomanToIntArgs() {
         return Stream.of(
                 Arguments.of("III", 3),
                 Arguments.of("IV", 4),
@@ -30,8 +30,8 @@ public class RomanToIntegerTest {
     }
 
     @ParameterizedTest
-    @MethodSource("getReverseIntegerArgs")
-    public void itShouldReverseInteger(String s, int expectedResult) {
+    @MethodSource("getRomanToIntArgs")
+    public void itShouldConvertRomanToInt(String s, int expectedResult) {
         // init
 
         // test

@@ -25,6 +25,6 @@ public class TwoSum {
             }
             numbersToIndicies.put(nums[i], i);
         }
-        throw new IllegalArgumentException();
+        return null;
     }
 }
