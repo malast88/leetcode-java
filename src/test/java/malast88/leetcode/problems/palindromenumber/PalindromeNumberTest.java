@@ -17,7 +17,7 @@ public class PalindromeNumberTest {
     @InjectMocks
     private PalindromeNumber sut;
 
-    private static Stream<Arguments> getReverseIntegerArgs() {
+    private static Stream<Arguments> getIsPalindromeArgs() {
         return Stream.of(
                 Arguments.of(123, false),
                 Arguments.of(0, true),
@@ -28,8 +28,8 @@ public class PalindromeNumberTest {
     }
 
     @ParameterizedTest
-    @MethodSource("getReverseIntegerArgs")
-    public void itShouldReverseInteger(int x, boolean expectedResult) {
+    @MethodSource("getIsPalindromeArgs")
+    public void itShouldAnswerIfItIsPalindrome(int x, boolean expectedResult) {
         // init
 
         // test
