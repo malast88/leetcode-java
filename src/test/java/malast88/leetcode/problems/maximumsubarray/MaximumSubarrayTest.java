@@ -1,4 +1,4 @@
-package malast88.leetcode.problems.countandsay;
+package malast88.leetcode.problems.maximumsubarray;
 
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -12,29 +12,26 @@ import java.util.stream.Stream;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @ExtendWith(MockitoExtension.class)
-public class CountSndSayTest {
+public class MaximumSubarrayTest {
 
     @InjectMocks
-    private CountSndSay sut;
+    private MaximumSubarray sut;
 
-    private static Stream<Arguments> getCountAndSayArgs() {
+    private static Stream<Arguments> getMaxSubArrayArgs() {
         return Stream.of(
-                Arguments.of(1, "1"),
-                Arguments.of(2, "11"),
-                Arguments.of(3, "21"),
-                Arguments.of(4, "1211"),
-                Arguments.of(5, "111221"),
-                Arguments.of(6, "312211")
+                Arguments.of(new int[]{-2, 1, -3, 4, -1, 2, 1, -5, 4}, 6),
+                Arguments.of(new int[]{8,-19,5,-4,20}, 21),
+                Arguments.of(new int[]{}, 0)
         );
     }
 
     @ParameterizedTest
-    @MethodSource("getCountAndSayArgs")
-    public void itShouldCountAndSay(int n, String expectedResult) {
+    @MethodSource("getMaxSubArrayArgs")
+    public void itShouldReturnMaxSubArray(int[] nums, int expectedResult) {
         // init
 
         // test
-        String result = sut.countAndSay(n);
+        int result = sut.maxSubArray(nums);
 
         // verify
         assertEquals(expectedResult, result);

@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class CountSndSay {
+public class CountAndSay {
 
     /**
      * Solution for https://leetcode.com/problems/count-and-say/
