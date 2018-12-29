@@ -17,7 +17,7 @@ public class PlusOneTest {
     @InjectMocks
     private PlusOne sut;
 
-    private static Stream<Arguments> getXXXArgs() {
+    private static Stream<Arguments> getPlusOneArgs() {
         return Stream.of(
                 Arguments.of(new int[]{1, 2, 3}, new int[]{1, 2, 4}),
                 Arguments.of(new int[]{9, 9}, new int[]{1, 0, 0}),
@@ -26,8 +26,8 @@ public class PlusOneTest {
     }
 
     @ParameterizedTest
-    @MethodSource("getXXXArgs")
-    public void itShouldXXX(int[] digits, int[] expectedResult) {
+    @MethodSource("getPlusOneArgs")
+    public void itShouldDoPlusOne(int[] digits, int[] expectedResult) {
         // init
 
         // test
