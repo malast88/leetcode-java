@@ -1,11 +1,17 @@
 language: java
 jdk:
   - openjdk8
+addons:
+  sonarcloud:
+    organization: "malast88-github"
+    token:
+      secure: "kJjwqsmmNIjOYV4VRtH6dSv/rG1kRNfHFprpTjiG3ZrvBGP2mtLCEdr6vwhy0Pg2f1+g1D9k5HeZUO3uQ5AxEsCHI9xKuCsyuJJRmhrMvZodBlk3te6oQOj2RTJHah3VuxtGDGtWxvR39zsLRsjYliO66rP6Yesacgqc43U35u2vMMVimMVhmVpgnCY4fzo3d+o95bUuRGGJM1u+KjkU5n7+gBZxKsyvbYxX8hv8dKAYEhvF//Mp55aPK64Oc7UvmlISwMyxDjIyi5zDTN3DqtKLP4RduPaul4IokUzrLmUbrLLUpIT6zguW1ZyeU+ZlkkIZx6O1RL54RXQM8GcgXqoxmxifu+G4r7hl3Y8lwKaF3mbf0+Q9MFWF/4mzR9U9n7JTwFbL2OHIe6+m8B48xStbhaWNEFWkB9lrpJUA0BjXvT2HlxfoWfueVn59ogKDKs2qrj/QksFi2qx7JmbZUvI8+Ho22hAShdlZJ/FophaMoNxM3nhcikE8n6UHupWYJoU/q4FI+cqNjK5SceXFm4XjrLqxqD3IppjMbOnoGze9n4A8ZOOFe1u1adbG52WPQFzT9lFKSZujxQq/WYVK/nF1klgJDoP/e9nSRlxxTXYBGg81s/SXLOpoWCWOXWX69N2qJtJ7g5BFZrgvSdwPxk8VLzpXlUvcUQgkYhwrj5A="
 before_script:
   - chmod +x gradlew
 script:
   - ./gradlew clean test
   - ./gradlew jacocoTestReport
+  - sonar-scanner
 after_success:
   - bash <(curl -s https://codecov.io/bash)
 
