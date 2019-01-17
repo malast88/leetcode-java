@@ -9,11 +9,11 @@ public class ExcelSheetColumnTitle {
      * @return
      */
     public String convertToTitle(int n) {
-        String result = "";
+        StringBuilder result = new StringBuilder("");
         while (n > 0) {
-            result = (char)((int)'A' + (n-1)%26) + result;
+            result.insert(0, (char)((int)'A' + (n-1)%26));
             n = (n-1)/26;
         }
-        return result;
+        return result.toString();
     }
 }

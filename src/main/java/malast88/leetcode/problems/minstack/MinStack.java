@@ -1,6 +1,7 @@
 package malast88.leetcode.problems.minstack;
 
-import java.util.Stack;
+import java.util.ArrayDeque;
+import java.util.Deque;
 
 /**
  * Solution for https://leetcode.com/problems/min-stack/
@@ -8,17 +9,17 @@ import java.util.Stack;
  */
 public class MinStack {
 
-    private Stack<Integer> values;
-    private Stack<Integer> minValues;
+    private Deque<Integer> values;
+    private Deque<Integer> minValues;
 
     public MinStack() {
-        values = new Stack<>();
-        minValues = new Stack<>();
+        values = new ArrayDeque<>();
+        minValues = new ArrayDeque<>();
     }
 
     public void push(int x) {
         int minValue = x;
-        if (!minValues.empty() && minValue > minValues.peek()) {
+        if (!minValues.isEmpty() && minValue > minValues.peek()) {
             minValue = minValues.peek();
         }
         minValues.push(minValue);

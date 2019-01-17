@@ -15,10 +15,8 @@ public class ImplementStrStr {
             return 0;
         }
         for (int hIndex = 0; hIndex < haystack.length(); hIndex++) {
-            if (haystack.charAt(hIndex) == needle.charAt(0)) {
-                if (checkSubstring(haystack, needle, hIndex)) {
-                    return hIndex;
-                }
+            if (haystack.charAt(hIndex) == needle.charAt(0) && checkSubstring(haystack, needle, hIndex)) {
+                return hIndex;
             }
         }
         return -1;

@@ -11,27 +11,19 @@ public class BalancedBinaryTree {
      * @return
      */
     public boolean isBalanced(TreeNode root) {
-        return isBalancedTree(root).isBalanced;
+        return isBalancedTree(root) >= 0;
     }
 
-    private BalancedResult isBalancedTree(TreeNode root) {
+    private int isBalancedTree(TreeNode root) {
         if (root == null) {
-            return new BalancedResult(true, 0);
+            return 0;
         }
-        BalancedResult leftResult = isBalancedTree(root.left);
-        BalancedResult rightResult = isBalancedTree(root.right);
-        int subtreeDiff = Math.abs(leftResult.depth - rightResult.depth);
-        int maxDepth = Math.max(leftResult.depth, rightResult.depth);
-        return new BalancedResult(leftResult.isBalanced && rightResult.isBalanced && subtreeDiff <= 1,
-                maxDepth + 1);
-    }
-
-    private class BalancedResult {
-        public boolean isBalanced;
-        public int depth;
-        public BalancedResult(boolean isBalanced, int depth) {
-            this.isBalanced = isBalanced;
-            this.depth = depth;
+        int leftResult = isBalancedTree(root.left);
+        int rightResult = isBalancedTree(root.right);
+        int subtreeDiff = Math.abs(leftResult - rightResult);
+        if (leftResult < 0 || rightResult < 0 || subtreeDiff > 1) {
+            return -1;
         }
+        return Math.max(leftResult, rightResult) + 1;
     }
 }

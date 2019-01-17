@@ -25,6 +25,6 @@ public class TwoSum {
             }
             numbersToIndicies.put(nums[i], i);
         }
-        return null;
+        return new int[0];
     }
 }

@@ -1,6 +1,7 @@
 package malast88.leetcode.problems.validparentheses;
 
-import java.util.Stack;
+import java.util.ArrayDeque;
+import java.util.HashMap;
 
 public class ValidParentheses {
 
@@ -15,20 +16,22 @@ public class ValidParentheses {
      * @return Validness of the string
      */
     public boolean isValid(String s) {
-        Stack<Character> stack = new Stack<>();
+        ArrayDeque<Character> stack = new ArrayDeque<>();
+        HashMap<Character, Character> parenthesesMap = new HashMap<>();
+        parenthesesMap.put('(', ')');
+        parenthesesMap.put('[', ']');
+        parenthesesMap.put('{', '}');
         for (int i = 0; i < s.length(); i++) {
             char currChar = s.charAt(i);
-            if (currChar == '(' || currChar == '[' || currChar == '{') {
+            if (parenthesesMap.keySet().contains(currChar)) {
                 stack.push(currChar);
             }
-            if (currChar == ')' || currChar == ']' || currChar == '}') {
+            if (parenthesesMap.containsValue(currChar)) {
                 if (stack.isEmpty()) {
                     return false;
                 }
                 char prevChar = stack.pop();
-                if (prevChar == '(' && currChar != ')'
-                        || prevChar == '[' && currChar != ']'
-                        || prevChar == '{' && currChar != '}') {
+                if (!parenthesesMap.get(prevChar).equals(currChar)) {
                     return false;
                 }
             }

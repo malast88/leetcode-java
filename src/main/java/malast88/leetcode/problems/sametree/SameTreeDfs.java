@@ -1,6 +1,6 @@
 package malast88.leetcode.problems.sametree;
 
-import java.util.Stack;
+import java.util.ArrayDeque;
 
 public class SameTreeDfs {
 
@@ -8,29 +8,46 @@ public class SameTreeDfs {
      * Solution for https://leetcode.com/problems/same-tree/
      * Given two binary trees, write a function to check if they are the same or not.
      * Two binary trees are considered the same if they are structurally identical and the nodes have the same value.
+     *
      * @param p
      * @param q
      * @return
      */
     public boolean isSameTree(TreeNode p, TreeNode q) {
-        Stack<TreeNode> pQ = new Stack<>();
-        Stack<TreeNode> qQ = new Stack<>();
-        pQ.push(p);
-        qQ.push(q);
-        while (!pQ.isEmpty() && !qQ.isEmpty()) {
+        ArrayDequeStack<TreeNode> pQ = new ArrayDequeStack<>();
+        ArrayDequeStack<TreeNode> qQ = new ArrayDequeStack<>();
+        if (pQ.tryPush(p) ^ qQ.tryPush(q)) {
+            return false;
+        }
+        while (!pQ.isEmpty()) {
             TreeNode pCurr = pQ.pop();
             TreeNode qCurr = qQ.pop();
-            if (pCurr == null && qCurr == null) {
-                continue;
-            } else if (pCurr == null || qCurr == null || pCurr.val != qCurr.val) {
+            if (pCurr.val != qCurr.val
+                    || pQ.tryPush(pCurr.left) ^ qQ.tryPush(qCurr.left)
+                    || pQ.tryPush(pCurr.right) ^ qQ.tryPush(qCurr.right)) {
                 return false;
-            } else {
-                pQ.push(pCurr.left);
-                pQ.push(pCurr.right);
-                qQ.push(qCurr.left);
-                qQ.push(qCurr.right);
             }
         }
-        return pQ.size() == qQ.size();
+        return true;
+    }
+
+    private class ArrayDequeStack<T> {
+        private ArrayDeque<T> data = new ArrayDeque<>();
+
+        public boolean tryPush(T item) {
+            if (item == null) {
+                return false;
+            }
+            data.push(item);
+            return true;
+        }
+
+        public T pop() {
+            return data.pop();
+        }
+
+        public boolean isEmpty() {
+            return data.isEmpty();
+        }
     }
 }

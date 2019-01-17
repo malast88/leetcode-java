@@ -1,6 +1,7 @@
 package malast88.leetcode.problems.maximumdepthofbinarytree;
 
-import java.util.Stack;
+import java.util.ArrayDeque;
+import java.util.Deque;
 
 public class MaximumDepthOfBinaryTreeDfs {
 
@@ -12,24 +13,27 @@ public class MaximumDepthOfBinaryTreeDfs {
      * @return
      */
     public int maxDepth(TreeNode root) {
-        Stack<TreeNode> stack = new Stack<>();
-        stack.push(root);
-        Stack<Integer> depthStack = new Stack<>();
+        Deque<TreeNode> stack = new ArrayDeque<>();
+        if (root != null) {
+            stack.push(root);
+        }
+        Deque<Integer> depthStack = new ArrayDeque<>();
         depthStack.push(1);
         int maxDepth = 0;
         while (!stack.isEmpty()) {
             TreeNode curr = stack.pop();
             int currDepth = depthStack.pop();
-            if (curr == null) {
-                continue;
-            }
             if (currDepth > maxDepth) {
                 maxDepth = currDepth;
             }
-            stack.push(curr.left);
-            depthStack.push(currDepth+1);
-            stack.push(curr.right);
-            depthStack.push(currDepth+1);
+            if (curr.left != null) {
+                stack.push(curr.left);
+                depthStack.push(currDepth+1);
+            }
+            if (curr.right != null) {
+                stack.push(curr.right);
+                depthStack.push(currDepth+1);
+            }
         }
         return maxDepth;
     }

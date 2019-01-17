@@ -26,6 +26,6 @@ public class TwoSumiiInputArrayIsSorted {
                 left++;
             }
         }
-        return null;
+        return new int[0];
     }
 }
