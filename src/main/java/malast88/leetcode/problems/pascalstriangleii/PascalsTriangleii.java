@@ -18,7 +18,7 @@ public class PascalsTriangleii {
         int[] result = new int[rowIndex+1];
         result[0] = 1;
         for (int i=1;i<=rowIndex;i++) {
-            result = getRow(result, i);
+            makeNextRow(result, i);
         }
         List<Integer> resultList = new ArrayList<>(rowIndex+1);
         for (int i=0;i<=rowIndex;i++) {
@@ -27,13 +27,12 @@ public class PascalsTriangleii {
         return resultList;
     }
 
-    private int[] getRow(int[] prevRow, int index) {
+    private void makeNextRow(int[] prevRow, int index) {
         int[] result = prevRow;
         result[index] = prevRow[index-1];
         for (int i=index-1;i>=1;i--) {
             result[i] = prevRow[i-1] + prevRow[i];
         }
         result[0] = prevRow[0];
-        return result;
     }
 }

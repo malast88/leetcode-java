@@ -1,7 +1,6 @@
 package malast88.leetcode.problems.sametree;
 
 import java.util.ArrayDeque;
-import java.util.Deque;
 
 public class SameTreeBfs {
 
@@ -14,33 +13,40 @@ public class SameTreeBfs {
      * @return
      */
     public boolean isSameTree(TreeNode p, TreeNode q) {
-        Deque<TreeNode> pQ = new ArrayDeque<>();
-        Deque<TreeNode> qQ = new ArrayDeque<>();
-        addNodeToDeque(pQ, p);
-        addNodeToDeque(qQ, q);
-        while (!pQ.isEmpty() && !qQ.isEmpty()) {
-            TreeNode pCurr = pQ.removeFirst();
-            TreeNode qCurr = qQ.removeFirst();
-            if (pCurr.val != qCurr.val) {
-                return false;
-            }
-            addNodeToDeque(pQ, pCurr.left);
-            addNodeToDeque(qQ, qCurr.left);
-            if (pQ.size() != qQ.size()) {
-                return false;
-            }
-            addNodeToDeque(pQ, pCurr.right);
-            addNodeToDeque(qQ, qCurr.right);
-            if (pQ.size() != qQ.size()) {
+        ArrayDequeQueue<TreeNode> pQ = new ArrayDequeQueue<>();
+        ArrayDequeQueue<TreeNode> qQ = new ArrayDequeQueue<>();
+        if (pQ.tryEnqueue(p) ^ qQ.tryEnqueue(q)) {
+            return false;
+        }
+        while (!pQ.isEmpty()) {
+            TreeNode pCurr = pQ.dequeue();
+            TreeNode qCurr = qQ.dequeue();
+            if (pCurr.val != qCurr.val
+                    || pQ.tryEnqueue(pCurr.left) ^ qQ.tryEnqueue(qCurr.left)
+                    || pQ.tryEnqueue(pCurr.right) ^ qQ.tryEnqueue(qCurr.right)) {
                 return false;
             }
         }
-        return pQ.size() == qQ.size();
+        return true;
     }
 
-    private void addNodeToDeque(Deque<TreeNode> deque, TreeNode node) {
-        if (node != null) {
-            deque.addLast(node);
+    private class ArrayDequeQueue<T> {
+        private ArrayDeque<T> data = new ArrayDeque<>();
+
+        public boolean tryEnqueue(T item) {
+            if (item == null) {
+                return false;
+            }
+            data.addLast(item);
+            return true;
+        }
+
+        public T dequeue() {
+            return data.removeFirst();
+        }
+
+        public boolean isEmpty() {
+            return data.isEmpty();
         }
     }
 }

@@ -24,8 +24,7 @@ public class RomanToIntegerTest {
                 Arguments.of("IX", 9),
                 Arguments.of("LVIII", 58),
                 Arguments.of("MCMXCIV", 1994),
-                Arguments.of("CDI", 401),
-                Arguments.of("CDI_", 401)
+                Arguments.of("CDI", 401)
         );
     }
 

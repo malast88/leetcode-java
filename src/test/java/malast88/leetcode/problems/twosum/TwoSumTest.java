@@ -21,7 +21,7 @@ public class TwoSumTest {
         return Stream.of(
                 Arguments.of(new int[]{2, 7, 11, 15}, 9, new int[]{0, 1}),
                 Arguments.of(new int[]{3, 3}, 6, new int[]{0, 1}),
-                Arguments.of(new int[]{}, 0, null)
+                Arguments.of(new int[]{}, 0, new int[]{})
         );
     }
 

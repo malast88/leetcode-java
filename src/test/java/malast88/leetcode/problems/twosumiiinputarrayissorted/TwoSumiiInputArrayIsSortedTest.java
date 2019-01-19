@@ -21,7 +21,7 @@ public class TwoSumiiInputArrayIsSortedTest {
         return Stream.of(
                 Arguments.of(new int[]{2, 7, 11, 15}, 9, new int[]{1, 2}),
                 Arguments.of(new int[]{1, 2, 7}, 9, new int[]{2, 3}),
-                Arguments.of(new int[]{1, 2, 7}, 10, null)
+                Arguments.of(new int[]{1, 2, 7}, 10, new int[]{})
         );
     }
 

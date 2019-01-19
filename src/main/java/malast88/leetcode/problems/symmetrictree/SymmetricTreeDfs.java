@@ -1,6 +1,6 @@
 package malast88.leetcode.problems.symmetrictree;
 
-import java.util.Stack;
+import java.util.ArrayDeque;
 
 public class SymmetricTreeDfs {
 
@@ -14,24 +14,40 @@ public class SymmetricTreeDfs {
         if (root == null) {
             return true;
         }
-        Stack<TreeNode> stackA = new Stack<>();
-        Stack<TreeNode> stackB = new Stack<>();
-        stackA.push(root.left);
-        stackB.push(root.right);
-        while (!stackA.isEmpty() && !stackB.isEmpty()) {
+        ArrayDequeStack<TreeNode> stackA = new ArrayDequeStack<>();
+        ArrayDequeStack<TreeNode> stackB = new ArrayDequeStack<>();
+        if (stackA.tryPush(root.left) ^ stackB.tryPush(root.right)) {
+            return false;
+        }
+        while (!stackA.isEmpty()) {
             TreeNode a = stackA.pop();
             TreeNode b = stackB.pop();
-            if (a == null && b == null) {
-                continue;
-            }
-            if (a == null || b == null || a.val != b.val) {
+            if (a.val != b.val
+                    || stackA.tryPush(a.left) ^ stackB.tryPush(b.right)
+                    || stackA.tryPush(a.right) ^ stackB.tryPush(b.left)) {
                 return false;
             }
-            stackA.push(a.left);
-            stackB.push(b.right);
-            stackA.push(a.right);
-            stackB.push(b.left);
         }
-        return stackA.size() == stackB.size();
+        return true;
+    }
+
+    private class ArrayDequeStack<T> {
+        private ArrayDeque<T> data = new ArrayDeque<>();
+
+        public boolean tryPush(T item) {
+            if (item == null) {
+                return false;
+            }
+            data.push(item);
+            return true;
+        }
+
+        public T pop() {
+            return data.pop();
+        }
+
+        public boolean isEmpty() {
+            return data.isEmpty();
+        }
     }
 }
